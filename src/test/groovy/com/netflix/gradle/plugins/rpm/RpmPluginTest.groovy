@@ -805,6 +805,35 @@ class RpmPluginTest extends ProjectSpec {
         scan.format.signature.getEntry(Signature.SignatureTag.LEGACY_PGP) != null
     }
 
+    def 'Larger RSA Key'() {
+        given:
+        Project project = ProjectBuilder.builder().build()
+
+        project.apply plugin: 'nebula.rpm'
+
+        project.task([type: Rpm], 'buildRpm', {
+            destinationDir = project.file('build/tmp/RpmPluginTest')
+            destinationDir.mkdirs()
+
+            packageName = 'bleah'
+            version = '1.0'
+            release = '1'
+            arch = I386
+
+            signingKeyId = 'D28489D9'
+            signingKeyPassphrase = 'os-package-large'
+            signingKeyRingFile = new File(getClass().getClassLoader().getResource('pgp-test-key/large/secring.gpg').toURI())
+            signingKeySignatureSize = 543
+        })
+
+        when:
+        project.tasks.buildRpm.execute()
+
+        then:
+        def scan = Scanner.scan(project.file('build/tmp/RpmPluginTest/bleah-1.0-1.i386.rpm'))
+        scan.format.signature.getEntry(Signature.SignatureTag.LEGACY_PGP) != null
+    }
+
     /**
      * Verifies that a symlink can be preserved.
      *

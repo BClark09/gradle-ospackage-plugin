@@ -98,6 +98,7 @@ abstract class SystemPackagingTask extends AbstractArchiveTask {
                 File defaultFile = new File(System.getProperty('user.home').toString(), '.gnupg/secring.gpg')
                 parentExten?.getSigningKeyRingFile() ?: (defaultFile.exists() ? defaultFile : null)
             })
+            mapping.map('signingKeySignatureSize', { parentExten?.getSigningKeySignatureSize()?:0 })
             mapping.map('user', { parentExten?.getUser() ?: getPackager() })
             mapping.map('maintainer', { parentExten?.getMaintainer() ?: getPackager() })
             mapping.map('uploaders', { parentExten?.getUploaders() ?: getPackager() })

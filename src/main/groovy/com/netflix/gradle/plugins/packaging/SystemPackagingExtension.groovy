@@ -45,6 +45,10 @@ class SystemPackagingExtension {
     String signingKeyId
     String signingKeyPassphrase
     File signingKeyRingFile
+
+    @Input @Optional
+    Integer signingKeySignatureSize
+
     String user
     String permissionGroup // Group is used by Gradle on tasks.
     /**

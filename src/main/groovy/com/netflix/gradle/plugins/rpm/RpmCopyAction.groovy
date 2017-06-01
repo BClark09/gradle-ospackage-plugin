@@ -86,6 +86,7 @@ class RpmCopyAction extends AbstractPackagingCopyAction<Rpm> {
                 builder.setPrivateKeyId task.getSigningKeyId()
                 builder.setPrivateKeyPassphrase task.getSigningKeyPassphrase()
                 builder.setPrivateKeyRingFile task.getSigningKeyRingFile()
+                builder.setPrivateKeySignatureSize task.getSigningKeySignatureSize()
             }
 
             String sourcePackage = task.sourcePackage
