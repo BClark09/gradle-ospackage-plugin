@@ -50,6 +50,9 @@ class SystemPackagingExtension {
     @InputFile @Optional
     File signingKeyRingFile
 
+    @Input @Optional
+    Integer signingKeySignatureSize
+
     // Metadata, some are probably specific to a type
     @Input @Optional
     String user

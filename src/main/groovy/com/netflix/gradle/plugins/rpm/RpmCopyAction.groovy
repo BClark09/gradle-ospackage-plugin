@@ -80,6 +80,7 @@ class RpmCopyAction extends AbstractPackagingCopyAction<Rpm> {
             builder.setPrivateKeyId task.getSigningKeyId()
             builder.setPrivateKeyPassphrase task.getSigningKeyPassphrase()
             builder.setPrivateKeyRingFile task.getSigningKeyRingFile()
+            builder.setPrivateKeySignatureSize task.getSigningKeySignatureSize()
         }
 
         String sourcePackage = task.sourcePackage
@@ -169,7 +170,7 @@ class RpmCopyAction extends AbstractPackagingCopyAction<Rpm> {
         builder.addDependency(dep.packageName, dep.flag, dep.version)
     }
 
-    @Override 
+    @Override
     protected void addConflict(Dependency dep) {
         builder.addConflicts(dep.packageName, dep.flag, dep.version)
     }
@@ -193,8 +194,8 @@ class RpmCopyAction extends AbstractPackagingCopyAction<Rpm> {
 
     @Override
     protected void end() {
-		
-		RandomAccessFile rpmFile 
+
+		RandomAccessFile rpmFile
 		try {
 			rpmFile = new RandomAccessFile( task.getArchivePath(), "rw")
 			builder.build(rpmFile.getChannel())
@@ -202,7 +203,7 @@ class RpmCopyAction extends AbstractPackagingCopyAction<Rpm> {
 		} finally {
 			if (rpmFile != null) {
 				rpmFile.close()
-			}	
+			}
 		}
     }
 
