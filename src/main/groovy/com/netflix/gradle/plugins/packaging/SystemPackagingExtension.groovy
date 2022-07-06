@@ -45,8 +45,6 @@ class SystemPackagingExtension {
     String signingKeyId
     String signingKeyPassphrase
     File signingKeyRingFile
-
-    @Input @Optional
     Integer signingKeySignatureSize
 
     String user
@@ -170,6 +168,12 @@ class SystemPackagingExtension {
     @PathSensitive(PathSensitivity.ABSOLUTE)
     File getSigningKeyRingFile() {
         return signingKeyRingFile
+    }
+
+    @Input
+    @Optional
+    Integer getSigningKeySignatureSize(){
+        return signingKeySignatureSize
     }
 
     @Input

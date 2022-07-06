@@ -827,7 +827,7 @@ class RpmPluginTest extends ProjectSpec {
         })
 
         when:
-        project.tasks.buildRpm.execute()
+        project.tasks.buildRpm.copy()
 
         then:
         def scan = Scanner.scan(project.file('build/tmp/RpmPluginTest/bleah-1.0-1.i386.rpm'))
