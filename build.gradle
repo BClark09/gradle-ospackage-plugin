@@ -42,10 +42,7 @@ configurations.all {
 
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.9'
-    compile fileTree(dir: 'libs', include: '*jar') {
-        // Where logging goes is a runtime decision
-        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-    }
+    api files('libs/redline-1.2.11-SNAPSHOT.jar')
     api('org.vafer:jdeb:1.8') {
         // Individual listing so that they translate into the pom file
         exclude group: 'org.apache.maven', module: 'maven-core'
